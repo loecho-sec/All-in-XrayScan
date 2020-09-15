@@ -1,6 +1,13 @@
-# All in XrayScan
+# All in XrayScan 
+
+ ###  Two Version：
 
 
+- XrayRad-Scan： 为高级版用户所用，利用Xray高级版，进行批量爬取及扫描！
+
+
+- XrayRad：为社区版用户所用，利用Rad和Xray进行批量爬取
+- XrayRad-Server: 配合社区版扫描的微信推送服务端
 
 
 
@@ -12,8 +19,9 @@
  /_/|_/_/   \__,_/\__, /_/ |_|\__,_/\__,_/     /____/\___/\__,_/_/ /_/
                  /____/
 
-                                                     Version:    v1.0
-                                                     Author:     loecho
+
+                                                     Version:    v 1.0
+                                                     Author:     loecho，Chr1sto
                                                      Blog:       https://loecho.me
 ```
 
@@ -51,12 +59,6 @@
 
 ![image-20200915150903777](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img/20200915150903.png)
 
-
-
- ###  脚本总共俩个版本：
-
-- XrayRad-Scan： 为高级版用户所用，利用Xray高级版，进行批量爬取及扫描！
-- XrayRad：为社区版用户所用，利用Rad和Xray进行批量爬取
 
 ### 具体配置文件看代码就懂了，爬取结果保存为漏洞出现时间格式！
 
