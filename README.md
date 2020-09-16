@@ -87,7 +87,7 @@
 
 #### 启动XrayRad-Wechat-Push：
 
-![image-20200915170712040](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img/20200915171304.png)
+![](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img/20200916174320.png)
 
 ### 推送结果：
 
