@@ -4,7 +4,9 @@
 
 - XrayRad-nopush: 社区版无推送，直接生成报告！
 
-![](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img20210922165431.png)
+同样支持单一类型、全部类型
+
+![](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img20210922165556.png)
 
 
 
