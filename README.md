@@ -1,5 +1,13 @@
 # All in XrayScan 
 
+### Version 1.0.1
+
+- XrayRad-nopush: 社区版无推送，直接生成报告！
+
+![](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img20210922165431.png)
+
+
+
  ###  Version 1.0：
 
 
