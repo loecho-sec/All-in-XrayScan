@@ -172,7 +172,7 @@ def main():
     filename = str(sys.argv[1])
     getScanTarget(filename)
 
-    executor = ThreadPoolExecutor(max_workers=4)
+    executor = ThreadPoolExecutor(max_workers=10)
 
     try:
         if 0 < len(sys.argv) < 4 and sys.argv[2] == 'all':
