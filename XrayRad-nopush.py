@@ -10,13 +10,13 @@ import simplejson
 '''
 程序流程：
 
-1. URL list --> for 循环: 1.rad 2.crawlgo --> 3. 爬虫子进程结束xray进程结束
+1. URL list --> 1.rad 2.crawlgo --> 3. 爬虫子进程结束xray进程结束
 
 '''
 
 radPath = 'rad_windows_amd64.exe' # 路径自行配置
 crawlergoPath = 'crawlergo.exe'
-xrayPath = 'lib/xray_windows_amd64.exe' # 路径自行配置
+xrayPath = 'xray_windows_amd64.exe' # 路径自行配置
 chrome_path = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' # chrome路径自行配置
 
 list_url = []
@@ -47,13 +47,13 @@ def allTypeScan():
 
 
 def Rad(target):
-    print("[+] RAD:\t\t" + target)
+    print("[+] RAD:\t" + target)
     rad_cmd = [radPath,'-t',target,'--http-proxy','127.0.0.1:7777']
     exec_rad = subprocess.Popen(rad_cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output,error = exec_rad.communicate()
 
 def crawlerGo(target):
-    print("[+] Crawler-Go:\t\t" + target)
+    print("[+] Crawler-Go:\t" + target)
     cmd = [crawlergoPath, "-c", chrome_path,"-t", "10","-f","smart","--fuzz-path","--push-to-proxy", "http://127.0.0.1:7777/", "--push-pool-max", "10","--output-mode", "json" , target]
     exec_crgo = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = exec_crgo.communicate()
