@@ -10,7 +10,7 @@ import simplejson
 '''
 程序流程：
 
-1. URL list --> 1.rad 2.crawlgo --> 3. 爬虫子进程结束xray进程结束
+1. URL list --> for 循环: 1.rad 2.crawlgo --> 3. 爬虫子进程结束xray进程结束
 
 '''
 
@@ -167,14 +167,13 @@ def banner():
 
 
 def main():
-
-    banner()
-    filename = str(sys.argv[1])
-    getScanTarget(filename)
-
-    executor = ThreadPoolExecutor(max_workers=10)
-
     try:
+        banner()
+        filename = str(sys.argv[1])
+        getScanTarget(filename)
+
+        executor = ThreadPoolExecutor(max_workers=4)
+
         if 0 < len(sys.argv) < 4 and sys.argv[2] == 'all':
             # xrayScan-all
             x = Process(target=allTypeScan)
