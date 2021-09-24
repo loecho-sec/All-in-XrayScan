@@ -10,7 +10,7 @@ import simplejson
 '''
 程序流程：
 
-1. URL list --> for 循环: 1.rad 2.crawlgo --> 3. 爬虫子进程结束xray进程结束
+1. URL list --> 1.rad 2.crawlgo --> 3. 爬虫子进程结束xray进程结束
 
 '''
 
