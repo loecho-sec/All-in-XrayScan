@@ -1,12 +1,22 @@
 # All in XrayScan 
 
-### Version 1.0.1
+### Version 2.0
 
-- XrayRad-nopush: 社区版无推送，直接生成报告！
+- XrayRad-nopush: 批量通用版，直接生成报告！
 
-同样支持单一类型、全部类型
+- 同样支持单一类型和全部类型！
 
-![](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img20210922165556.png)
+- 爬虫修改为双爬虫（RAD + CrawleGo），宗旨是宁愿多爬，也不要漏爬！
+
+- 并发进程修改为进程池，高效并发！
+
+- 保存CrawleGo的爬取结果以及爬取路径，后续手工测试时，重点关注一下！
+
+- 临时完成，有Bug请及时反馈！
+
+
+![](https://loecho.oss-cn-beijing.aliyuncs.com/Blog-Img20210925033811.png)
+
 
 
 
