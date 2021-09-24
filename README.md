@@ -3,6 +3,44 @@
 ### Version 2.0
 
 - XrayRad-nopush: 批量通用版，直接生成报告！
+```python
+
+                ____                        __________     .___
+    \   \/  /___________  ___.__.   \______   \_____     __| _/
+     \     /\_  __ \__  \<   |  |    |       _/\__  \   / __ |
+     /     \ |  | \// __ \\___  |    |    |   \ / __ \_/ /_/ |
+    /___/\  \|__|  (____  / ____|____|____|_  /(____  /\____ |
+          \_/           \/\/   /_____/      \/      \/      \/
+
+                                        Author:	loecho       
+                                        Date:   2021/09/24      
+
+    --------------------------------------------------------------------------------------
+                 sqlin           SQL注入漏洞探测
+                 cmd             命令执行漏洞探测
+                 xss             XSS漏洞探测
+                 xxe             XXE漏洞探测
+                 base            baseline
+                 path            目录穿越
+                 upload          文件上传
+                 brute           暴力破解
+                 dir             目录扫描
+                 urlred          任意uRL跳转
+                 crlf            CRLF
+                 thinkphp        THINKPHP系列漏洞探测
+                 shiro           SHIRO系列漏洞探测
+                 fastjson        FASTJSON系列漏洞探测
+                 struts          STRUTS系列漏洞探测
+
+            usage:
+
+                 <1> allType-漏洞检测
+                     python3 xrayRad.py url.txt all
+
+                 <2> SQL注入漏洞检测
+                     python3 xrayRad.py url.txt sqlin
+
+```
 
 - 同样支持单一类型和全部类型！
 
