@@ -14,10 +14,13 @@ import simplejson
 
 '''
 
-radPath = 'rad_windows_amd64.exe' # 路径自行配置
-crawlergoPath = 'crawlergo.exe'
-xrayPath = 'xray_windows_amd64.exe' # 路径自行配置
+##############################################################################################
+radPath = 'lib/rad_windows_amd64.exe'   # 路径自行配置
+crawlergoPath = 'lib/crawlergo.exe'     # 路径自行配置
+xrayPath = 'lib/xray_windows_amd64.exe' # 路径自行配置
 chrome_path = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' # chrome路径自行配置
+logpath = '' # 路径自行配置
+###############################################################################################
 
 list_url = []
 
@@ -30,16 +33,15 @@ def getScanTarget(filename):
             else:
                 target = target
             list_url.append(target)
-        #print(list_url)
-        print("[+] ScanTarget Count is: " + str(len(set(list_url))))
+        print("\033[32m[+] ScanTarget Count is:  " + str(len(set(list_url))) + "\033[0m")
 
 def TypeScan(plugin):
-    xray_cmd = [xrayPath,'webscan','--plugins',plugin,'--listen','127.0.0.1:7777','--html-output','__timestamp__.html']
+    xray_cmd = [xrayPath,'webscan','--plugins',plugin,'--listen','127.0.0.1:7777','--html-output','({})-__timestamp__.html'.format(plugin)]
     exec_xray = subprocess.Popen(xray_cmd)
     output, error = exec_xray.communicate()
 
 def allTypeScan():
-    xray_cmd = [xrayPath, 'webscan', '--listen', '127.0.0.1:7777', '--html-output', '__timestamp__.html']
+    xray_cmd = [xrayPath, 'webscan', '--listen', '127.0.0.1:7777', '--html-output', '(all)-__timestamp__.html']
     exec_xray = subprocess.Popen(xray_cmd)
     output, error = exec_xray.communicate()
 
@@ -47,14 +49,14 @@ def allTypeScan():
 
 
 def Rad(target):
-    print("[+] RAD:\t" + target)
+    print("\033[32m[+] RAD-Target:  " + target +  "\033[0m")
     rad_cmd = [radPath,'-t',target,'--http-proxy','127.0.0.1:7777']
-    exec_rad = subprocess.Popen(rad_cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    exec_rad = subprocess.Popen(rad_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output,error = exec_rad.communicate()
 
 def crawlerGo(target):
-    print("[+] Crawler-Go:\t" + target)
-    cmd = [crawlergoPath, "-c", chrome_path,"-t", "10","-f","smart","--fuzz-path","--push-to-proxy", "http://127.0.0.1:7777/", "--push-pool-max", "10","--output-mode", "json" , target]
+    print("\033[32m[+] Crawler-Go-Taeget:  " + target)
+    cmd = [crawlergoPath, "-c", chrome_path,"-t", "10","-f","smart","--fuzz-path","--push-to-proxy", "http://127.0.0.1:7777/", "--push-pool-max", "10","--output-mode", "json", target]
     exec_crgo = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = exec_crgo.communicate()
     #  save path:
@@ -67,10 +69,13 @@ def crawlerGo(target):
 
         # save crawler-result:
         for p in req_list:
-            print("[+] Find_New_Path: " + p["url"])
+            # print("[+] Find_New_Path: " + p["url"])
             path2File(str(p))
         for sd in sub_domain:
             print("[+] Find_New_SubDomain: " + str(sd))
+
+            # sub_domain Add
+            list_url.append(sd)
             sub2File(str(sd))
         for d in all_domain_list:
             print("[+] Find_New_Domain: " + str(d))
@@ -102,23 +107,33 @@ def plugin_p(type_info):
 
     return alltype[type_info]
 
+def allScanRun(target):
+    # RAD:
+    try:
+        Rad(target)
+        crawlerGo(target)
+    except Exception as a:
+        print("[x] Crawler Error: " + str(a))
+
+
+
 def path2File(paths):
     try:
-        f = open('crawl_path.txt','a')
+        f = open('{}/crawl_path.txt'.format(logpath),'a')
         f.write(paths + '\n')
     finally:
         f.close()
 
 def sub2File(subdomains):
     try:
-        f = open('sub_domains.txt','a')
+        f = open('{}/sub_domains.txt'.format(logpath),'a')
         f.write(subdomains + '\n')
     finally:
         f.close()
 
 def all2File(subdomains):
     try:
-        f = open('all_domains.txt','a')
+        f = open('{}/all_domains.txt'.format(logpath),'a')
         f.write(subdomains + '\n')
     finally:
         f.close()
@@ -171,16 +186,14 @@ def main():
         banner()
         filename = str(sys.argv[1])
         getScanTarget(filename)
-
-        executor = ThreadPoolExecutor(max_workers=4)
-
+        executor = ThreadPoolExecutor(max_workers=8)
         if 0 < len(sys.argv) < 4 and sys.argv[2] == 'all':
+
             # xrayScan-all
             x = Process(target=allTypeScan)
             x.start()
-            print("[+] All Type XrayVulScan is Runing!")
-            executor.map(Rad, list_url)
-            executor.map(crawlerGo, list_url)
+            print("\033[32m[+] All Type XrayVulScan is Runing!\033[32m")
+            executor.map(allScanRun,list_url)
 
 
         elif 0 < len(sys.argv) < 4:
@@ -188,9 +201,8 @@ def main():
             # plugins-Scan:
             x = Process(target=TypeScan, args=(plugin_p(sys.argv[2]),))
             x.start()
-            print("[+] Single Type XrayVulScan is Runing! The Type is {}".format(plugin_p(sys.argv[2])))
-            executor.map(Rad, list_url)
-            executor.map(crawlerGo, list_url)
+            print("\033[32m[+] Single Type XrayVulScan is Runing! The Type is \033[32m  {}  ".format(plugin_p(sys.argv[2])))
+            executor.map(allScanRun, list_url)
 
         else:
             print("[x] Miss arg !")
